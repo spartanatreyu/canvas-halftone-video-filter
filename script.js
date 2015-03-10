@@ -55,16 +55,26 @@ function step(timestamp)
 	var progress = timestamp - start;
 
 	//clear the canvas so it's ready to draw on
-	ctx.clearRect(0,0,canvasWidth,canvasHeight);
+	//ctx.clearRect(0,0,canvasWidth,canvasHeight);
 
 	//draw each circle
 	for(var i = 0; i < canvasWidth/(maxSize*2); i++)
 	{
 		for(var j = 0; j < canvasHeight/(maxSize*2); j++)
 		{
+			//
+			//1 * maxSize * (1)
+			//
+			//(i * 4 * maxSize * 2)
+			//(i * 4 * maxSize * 2)
+			//(i * 4 * maxSize * 2)
 			//find out the current circle's colour
-			//ctx.fillStyle = 'rgb(200,0,0)';
-			ctx.fillStyle = 'rgb('+currentFrameData[0]+','+currentFrameData[1]+','+currentFrameData[2]+')';
+			//4 = bytes in an rgba value
+			//2 = maxSize * 2 to find maxSize diameter
+			ctx.fillStyle = 'rgb('+
+				currentFrameData[(i * 4 * maxSize * 2) + 0]+','+
+				currentFrameData[(i * 4 * maxSize * 2) + 1]+','+
+				currentFrameData[(i * 4 * maxSize * 2) + 2]+')';
 
 			//draw the actual circle
 			ctx.beginPath();
