@@ -9,6 +9,13 @@
 	{
 		background: black;
 	}
+	.control
+	{
+		float: left;
+		background: lightgrey;
+		margin: 1em;
+		padding: 1em;
+	}
 	</style>
 </head>
 <body>
@@ -18,18 +25,29 @@
 	<video id="videoInput" src="video.webm" width="640" height="360" controls muted autoplay loop="true"></video>
 	<hr />
 
-	<p>Intermediate canvas</p>
-	<canvas id="intermediate" width="640" height="360"></canvas>
-	<hr />
+	<div style="display: none">
+		<p>Intermediate canvas (extracts video data from video file and draws onto canvas)</p>
+		<canvas id="intermediate" width="640" height="360"></canvas>
+		<hr />
+	</div>
 
 	<p>Output canvas</p>
 	<canvas id="canvas" onclick="beatTap()"></canvas>
 	<br />
-	<input id="bpmRange" type="range" value="128" min="0" max="180" oninput="changeEventHandler(event)"/>
-	<input id="bpmCounter" type="number" min="0" max="180" style="width: 60px;" oninput="changeEventHandler(event)"/>bpm
-	<br>
-	<p>Use the input above to set the beats per minute, click the visualisation to set the start of the beat.</p>
-
+	<div class="control">
+		<div style="text-align: center; font-weight: bold;">Beats per minute</div>
+		<input id="bpmRange" type="range" value="128" min="1" max="180" oninput="changeBpmHandler(event)"/>
+		<input id="bpmCounter" type="number" min="1" max="180" style="width: 40px; text-align: right;" oninput="changeBpmHandler(event)"/> bpm
+		<br>
+	</div>
+	<div class="control">
+		<div style="text-align: center; font-weight: bold;">Halftone resolution</div>
+		<input id="halftoneRange" type="range" min="1" max="40" oninput="changeHalftoneHandler(event)"/>
+		<input id="halftoneCounter" type="number" min="1" max="40" style="width: 40px; text-align: right;" oninput="changeHalftoneHandler(event)"/> pixels
+		<br>
+	</div>
+	<br style="clear:both;">
+	<p id="message"></p>
 	<script src="script.js"></script>
 </body>
 </html>
